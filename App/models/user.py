@@ -9,14 +9,16 @@ class User(db.Model):
 
 
 
-    def __init__(self, username, password):
+    def __init__(self, username,email, password):
         self.username = username
+        self.email = email
         self.set_password(password)
 
     def toDict(self):
         return{
             'id': self.id,
-            'username': self.username
+            'username': self.username,
+            'email': self.email
         }
 
     def set_password(self, password):
