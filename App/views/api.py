@@ -3,7 +3,7 @@ from flask import Blueprint, redirect, render_template, request, send_from_direc
 api_views = Blueprint('api_views', __name__, template_folder='../templates')
 
 @api_views.route('/')
-def get_api_docs():
+def get_login_page():
     return render_template('login.html')
 
 @api_views.route('/signup')

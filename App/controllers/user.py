@@ -14,8 +14,8 @@ def create_user(username, email, password):
         db.session.commit()
     except IntegrityError:
         db.session.rollback()
-        return 'email or username already in use'
-    return 'user created'
+        return 'fail'
+    return 'pass'
     
 
 

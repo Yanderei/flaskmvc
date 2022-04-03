@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template, jsonify, request, send_from_directory
+from flask import Blueprint, render_template, jsonify, request, send_from_directory,flash
 from flask_jwt import jwt_required
+
 
 
 from App.controllers import (
@@ -32,6 +33,11 @@ def render_game():
 @user_views.route('/signup', methods=['POST'])
 def signup_user():
     data = request.form
-    newuser = create_user(data['username'], data['email'], data['password'])
-    return newuser
+    stat = create_user(data['username'], data['email'], data['password'])
+    if(stat == 'pass'):
+        flash('Acount Created!')
+        return render_template('login.html')
+    else:
+        flash('Username or Email already in use!')
+        return render_template('signup.html')
     
