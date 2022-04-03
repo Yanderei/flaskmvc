@@ -29,7 +29,7 @@ def static_user_page():
   return send_from_directory('static', 'static-user.html')
 
 @user_views.route('/game')
-@jwt_required()
+#@jwt_required()
 def render_game():
     return render_template('index.html')
 
