@@ -1,5 +1,7 @@
 from App.models import User
 from App.database import db
+from sqlalchemy.exc import IntegrityError
+
 
 
 def get_all_users():
@@ -7,8 +9,17 @@ def get_all_users():
 
 def create_user(username, email, password):
     newuser = User(username=username, email=email,password=password)
-    db.session.add(newuser)
-    db.session.commit()
+    try:
+        db.session.add(newuser)
+        db.session.commit()
+    except IntegrityError:
+        db.session.rollback()
+        return 'email or username already in use'
+    return 'user created'
+    
+
+
+
 
 def get_all_users_json():
     users = User.query.all()

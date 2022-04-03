@@ -28,3 +28,10 @@ def static_user_page():
 @user_views.route('/game')
 def render_game():
     return render_template('index.html')
+
+@user_views.route('/signup', methods=['POST'])
+def signup_user():
+    data = request.form
+    newuser = create_user(data['username'], data['email'], data['password'])
+    return newuser
+    
