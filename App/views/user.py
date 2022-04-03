@@ -21,10 +21,10 @@ def client_app():
     users = get_all_users_json()
     return jsonify(users)
 
-@user_views.route('/api/lol')
-def lol():
-    return 'lol'
-
 @user_views.route('/static/users')
 def static_user_page():
   return send_from_directory('static', 'static-user.html')
+
+@user_views.route('/game')
+def render_game():
+    return render_template('index.html')
