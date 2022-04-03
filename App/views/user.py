@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, jsonify, request, send_from_directory,flash
+from flask import Blueprint, render_template, jsonify, request, send_from_directory,flash, redirect, url_for
 from flask_jwt import jwt_required
 
 
@@ -8,8 +8,10 @@ from App.controllers import (
     get_all_users,
     get_all_users_json,
 )
+from App.controllers import *
 
 user_views = Blueprint('user_views', __name__, template_folder='../templates')
+
 
 
 @user_views.route('/users', methods=['GET'])
@@ -27,6 +29,7 @@ def static_user_page():
   return send_from_directory('static', 'static-user.html')
 
 @user_views.route('/game')
+@jwt_required()
 def render_game():
     return render_template('index.html')
 
@@ -41,3 +44,11 @@ def signup_user():
         flash('Username or Email already in use!')
         return render_template('signup.html')
     
+@user_views.route('/auth',methods=['POST'])
+def logins_user():
+    data = request.form
+    user = authenticate(data['username'], data['password'])
+    if user == None:
+        flash('Wrong Username or Password!')
+        return render_template('login.html')
+    return render_game()

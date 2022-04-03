@@ -16,10 +16,6 @@ def create_user(username, email, password):
         db.session.rollback()
         return 'fail'
     return 'pass'
-    
-
-
-
 
 def get_all_users_json():
     users = User.query.all()
@@ -30,3 +26,4 @@ def get_all_users_json():
 
 def get_all_users():
     return User.query.all()
+
