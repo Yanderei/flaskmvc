@@ -56,3 +56,10 @@ def logsIn_user():
     login_user(user)
     #return redirect(url_for('user_views.render_game'))
     return render_game()
+
+@user_views.route('/logout', methods=['GET'])
+@login_required
+def logout():
+  logout_user()
+  flash('Logged Out!')
+  return render_template('login.html')
