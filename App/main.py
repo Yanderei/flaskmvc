@@ -18,6 +18,7 @@ from App.views import (
     user_views,
     api_views
 )
+from App.models import *
 
 views = [
     user_views,

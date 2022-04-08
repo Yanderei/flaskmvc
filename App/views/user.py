@@ -54,4 +54,5 @@ def logsIn_user():
         flash('Wrong Username or Password!')
         return render_template('login.html')
     login_user(user)
+    #return redirect(url_for('user_views.render_game'))
     return render_game()
